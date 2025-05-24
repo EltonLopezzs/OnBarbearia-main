@@ -14,15 +14,14 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session, user }) {
+      // Busca o usuário no banco de dados para garantir que a 'role' esteja atualizada.
       const userFromDb = await db.user.findUnique({
         where: { id: user.id },
       });
 
-      // ADICIONE ESTE CONSOLE.LOG
-      console.log("[AUTH.TS] Usuário do banco de dados:", userFromDb);
-
+      // Adiciona o id e a role ao objeto da sessão.
       session.user.id = user.id;
-      session.user.role = userFromDb?.role ?? null;
+      session.user.role = userFromDb?.role ?? null; // A role é adicionada aqui!
 
       return session;
     },

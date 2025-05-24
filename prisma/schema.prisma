@@ -9,51 +9,85 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+// prisma/schema.prisma
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  bookings      Booking[]
+  id                  String      @id @default(cuid())
+  name                String?
+  email               String?     @unique
+  emailVerified       DateTime?
+  image               String?
+  accounts            Account[]
+  sessions            Session[]
+  bookings            Booking[]
+  role                UserRole    @default(CUSTOMER)
+
+  // INÍCIO DA ALTERAÇÃO (Opção B)
+  // Se um BARBER ou OWNER gerencia/trabalha em UMA barbearia
+  managedBarbershopId String?      // ID da barbearia que este usuário gerencia/trabalha
+  managedBarbershop   Barbershop?  @relation("ManagedByUsers", fields: [managedBarbershopId], references: [id])
+  // FIM DA ALTERAÇÃO
+}
+
+enum UserRole {
+  CUSTOMER
+  BARBER
+  OWNER
 }
 
 model Barbershop {
-  id          String    @id @default(uuid())
-  name        String
-  address     String
-  imageUrl    String
-  stars       String
-  ratings     String
-  description String
-  telefone    String
-  localizacaomaps String
-  services    Service[]
-  bookings    Booking[]
+  id                  String   @id @default(cuid())
+  name                String
+  address             String
+  imageUrl            String
+  description         String  
+  services            Service[]
+  bookings            Booking[]
+  ratings             String  
+  stars               String  
+  telefone            String  
+  operatingHours      OperatingHours[]
+  localizacaomaps     String?
+
+  // INÍCIO DA ALTERAÇÃO (Opção B)
+  // Relação inversa para usuários que gerenciam/trabalham nesta barbearia
+  managingUsers       User[]   @relation("ManagedByUsers")
+  // FIM DA ALTERAÇÃO
+}
+
+// ... (restante do seu schema: OperatingHours, Service, Booking, Account, Session, VerificationToken)
+// Mantenha os outros modelos como estavam na resposta anterior.
+model OperatingHours {
+  id            String     @id @default(cuid())
+  barbershop    Barbershop @relation(fields: [barbershopId], references: [id])
+  barbershopId  String
+  dayOfWeek     Int        // 0 para Domingo, 1 para Segunda, ..., 6 para Sábado
+  startTime     String     // Formato "HH:mm"
+  endTime       String     // Formato "HH:mm"
+  isClosed      Boolean    @default(false)
+
+  @@unique([barbershopId, dayOfWeek])
 }
 
 model Service {
-  id           String     @id @default(uuid())
+  id           String      @id @default(cuid())
   name         String
-  price        Decimal    @db.Decimal(10, 2)
+  price        Decimal     @db.Decimal(10, 2)
+  barbershop   Barbershop  @relation(fields: [barbershopId], references: [id])
   barbershopId String
-  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
   description  String
-  imageUrl     String
+  imageUrl     String     
   bookings     Booking[]
 }
 
 model Booking {
-  id           String     @id @default(uuid())
-  userId       String
+  id           String     @id @default(cuid())
   user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  service      Service    @relation(fields: [serviceId], references: [id])
   serviceId    String
-  Service      Service    @relation(fields: [serviceId], references: [id])
-  barbershopId String
   barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
+  barbershopId String
   date         DateTime
 }
 
