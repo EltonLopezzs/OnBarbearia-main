@@ -63,7 +63,7 @@ export default async function AdminServicesPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Gerenciar Serviços</h1>
-          <p className="text-muted-foreground">Adicione, edite ou remova os serviços oferecidos em "{managedBarbershop.name}".</p>
+          <p className="text-muted-foreground">Adicione, edite ou remova os serviços oferecidos em &quot;{managedBarbershop.name}&quot;.</p>
         </div>
         <ServiceDialogController
           barbershopId={managedBarbershop.id}
@@ -81,7 +81,7 @@ export default async function AdminServicesPage() {
           </CardHeader>
           <CardContent>
             <CardDescription>
-              Comece adicionando os serviços que sua barbearia oferece clicando no botão "Adicionar Novo Serviço".
+              Comece adicionando os serviços que sua barbearia oferece clicando no botão &quot;Adicionar Novo Serviço&quot;.
             </CardDescription>
           </CardContent>
         </Card>
@@ -91,7 +91,7 @@ export default async function AdminServicesPage() {
             <Card key={service.id} className="flex flex-col overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <div className="relative h-48 w-full bg-muted">
                 <Image
-                  src={service.imageUrl || "/banner.jpg"}
+                  src={service.imageUrl || "/banner.jpg"} // Assumindo que /banner.jpg é uma imagem placeholder válida na sua pasta public
                   alt={service.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

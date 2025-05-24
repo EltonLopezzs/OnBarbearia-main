@@ -58,7 +58,7 @@ export default function DeleteServiceButton({ serviceId, barbershopId, serviceNa
         <AlertDialogHeader>
           <AlertDialogTitle>Confirmar Exclusão</AlertDialogTitle>
           <AlertDialogDescription>
-            Tem certeza que deseja excluir o serviço "{serviceName}"? Esta ação não pode ser desfeita. Agendamentos futuros para este serviço impedirão a exclusão.
+            Tem certeza que deseja excluir o serviço &quot;{serviceName}&quot;? Esta ação não pode ser desfeita. Agendamentos futuros para este serviço impedirão a exclusão.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

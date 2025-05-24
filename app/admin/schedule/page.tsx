@@ -36,7 +36,7 @@ export default async function AdminSchedulePage() {
     <div className="space-y-8">
       <div className="pb-4 border-b">
         <h1 className="text-3xl font-bold text-foreground">Gerenciar Horários de Funcionamento</h1>
-        <p className="text-muted-foreground">Defina os dias e horários em que "{managedBarbershop.name}" estará aberta.</p>
+        <p className="text-muted-foreground">Defina os dias e horários em que &quot;{managedBarbershop.name}&quot; estará aberta.</p>
       </div>
       <ScheduleForm initialHours={operatingHours} />
     </div>

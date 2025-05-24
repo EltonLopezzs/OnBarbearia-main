@@ -69,7 +69,7 @@ export default async function AdminDashboardPage() {
         <AlertDescription>
           Você está logado como {session.user.role === UserRole.OWNER ? "Proprietário(a)" : "Barbeiro(a)"}, mas sua conta de usuário não está associada a nenhuma barbearia específica no sistema para gerenciamento.
           <br /><br />
-          <strong>Ação Necessária:</strong> Peça ao administrador do sistema (ou quem tem acesso direto ao banco de dados Supabase) para editar seu registro na tabela "User" e preencher o campo `managedBarbershopId` com o ID da barbearia que você deve gerenciar.
+          <strong>Ação Necessária:</strong> Peça ao administrador do sistema (ou quem tem acesso direto ao banco de dados Supabase) para editar seu registro na tabela &quot;User&quot; e preencher o campo `managedBarbershopId` com o ID da barbearia que você deve gerenciar.
         </AlertDescription>
       </Alert>
     );
