@@ -74,7 +74,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
               </Badge>
 
               <h2 className="font-bold md:text-base">
-                {booking.Service.name}
+                {booking.service.name}
               </h2>
 
               <div className="flex items-center gap-2">
