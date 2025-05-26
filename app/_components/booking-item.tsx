@@ -7,7 +7,7 @@ import Image from "next/image";
 import { cancelBooking } from "../_actions/cancel-booking";
 import BookingInfo from "./booking-info";
 import { useState } from "react";
-import { Loader2, MapPin } from "lucide-react"; // <-- Ícone adicionado aqui
+import { Loader2, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
