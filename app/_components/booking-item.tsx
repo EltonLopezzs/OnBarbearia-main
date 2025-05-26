@@ -37,7 +37,7 @@ import {
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
     include: {
-      Service: true;
+      service: true;
       barbershop: true;
     };
   }>;
